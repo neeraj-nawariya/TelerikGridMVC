@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        @(Html.Kendo().Grid<TelerikGridMVC.Models.OrderViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.OrderID).Filterable(false);
+                columns.Bound(p => p.Freight);
+                columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.ShipName);
+                columns.Bound(p => p.ShipCity);
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Search();
+                toolbar.Excel();
+                toolbar.Pdf();
+            })
+            .Pdf(pdf => pdf.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+            .Excel(excel => excel.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+            .Pageable()
+            .Sortable()
+            .Navigatable()
+            .Resizable(r => r.Columns(true))
+            .Reorderable(r => r.Columns(true))
+            .Groupable(g => g.ShowFooter(false))
+            .Filterable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(20)
+                .Read(read => read.Action("Orders_Read", "Grid"))
+            )
+        )
+    </div>
+</div>
+<br />
+<br /><br />
+<div class="row">
+    <h1>Hello</h1>
+    <div class="col-12">
+        @(Html.Kendo().Grid<TelerikGridMVC.Models.ProductViewModel>()
+            .Name("grid1")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ProductId).Filterable(false);
+                columns.Bound(p => p.ProductName);
+                columns.Bound(p => p.Price);
+                //columns.Bound(p => p.Price).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.InStock);
+                columns.Bound(p => p.Category);
+                columns.Bound(p => p.Rating);
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Search(); 
+                toolbar.Excel();
+                toolbar.Pdf();
+            })
+            .Pdf(pdf => pdf.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+            .Excel(excel => excel.ProxyURL(Url.Action("Excel_Export_Save", "Grid")))
+            .Pageable()
+            .Sortable()
+            .Navigatable()
+            .Resizable(r => r.Columns(true))
+            .Reorderable(r => r.Columns(true))
+            .Groupable(g => g.ShowFooter(false)) // for showing groupable you also create group by drag a column to groupable 
+            .Filterable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(20)
+                .Read(read => read.Action("Products_Read", "Grid"))
+                .Group(groups => groups.Add(p => p.Category)) // for adding group
+            )
+        )
+    </div>
+</div>
