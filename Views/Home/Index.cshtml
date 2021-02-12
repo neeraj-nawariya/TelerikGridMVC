@@ -1,24 +1,17 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@using Kendo.Mvc.UI.Fluent
+@*@using Kendo.Mvc.UI.Fluent*@
 <div class="row">
     <h1>TreeView</h1>
     <div class="demo-section k-content">
         @(Html.Kendo().TreeView()
         .Name("treeview")
         .DataTextField("Name")
-        .DataTextField("hasChildren")
         .DataSource(dataSource => dataSource
-            .Model(m=>m 
-            .Id("id")
-            .HasChildren("hasChildren")
-            )
             .Read(read => read
                 .Action("Remote_Data_Binding_Get_Employees", "Grid")
                 )
-            
-
         )
 
     )
