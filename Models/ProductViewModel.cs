@@ -13,5 +13,6 @@ namespace TelerikGridMVC.Models
         public string Country { get; set; }
         public Nullable<int> Units { get; set; }
         public string ProductName { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

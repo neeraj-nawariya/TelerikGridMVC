@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="dca116996cc844a2b71a98079e93f6e2" Name="Diagram1">
         <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK__Products__Parent__34C8D9D1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

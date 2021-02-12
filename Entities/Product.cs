@@ -14,6 +14,11 @@ namespace TelerikGridMVC.Entities
     
     public partial class Product
     {
+        public Product()
+        {
+            this.Products1 = new HashSet<Product>();
+        }
+    
         public int ProductId { get; set; }
         public string Price { get; set; }
         public Nullable<int> InStock { get; set; }
@@ -22,5 +27,9 @@ namespace TelerikGridMVC.Entities
         public string Country { get; set; }
         public Nullable<int> Units { get; set; }
         public string ProductName { get; set; }
+        public Nullable<int> ParentId { get; set; }
+    
+        public virtual ICollection<Product> Products1 { get; set; }
+        public virtual Product Product1 { get; set; }
     }
 }

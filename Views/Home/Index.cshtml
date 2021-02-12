@@ -1,11 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-
+@using Kendo.Mvc.UI.Fluent
 <div class="row">
-    <div class="col-12">
-        @(Html.Kendo().Grid<TelerikGridMVC.Models.OrderViewModel>()
+    <h1>TreeView</h1>
+    <div class="demo-section k-content">
+        @(Html.Kendo().TreeView()
+        .Name("treeview")
+        .DataTextField("Name")
+        .DataTextField("hasChildren")
+        .DataSource(dataSource => dataSource
+            .Model(m=>m 
+            .Id("id")
+            .HasChildren("hasChildren")
+            )
+            .Read(read => read
+                .Action("Remote_Data_Binding_Get_Employees", "Grid")
+                )
+            
+
+        )
+
+    )
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @(Html.Kendo().Grid<TelerikGridMVC.Models.OrderViewModel>()
             .Name("grid")
             .Columns(columns =>
             {
@@ -38,14 +58,15 @@
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
         )
+        </div>
     </div>
-</div>
-<br />
-<br /><br />
-<div class="row">
-    <h1>Hello</h1>
-    <div class="col-12">
-        @(Html.Kendo().Grid<TelerikGridMVC.Models.ProductViewModel>()
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <h1>Hello</h1>
+        <div class="col-12">
+            @(Html.Kendo().Grid<TelerikGridMVC.Models.ProductViewModel>()
             .Name("grid1")
             .Columns(columns =>
             {
@@ -59,7 +80,7 @@
             })
             .ToolBar(toolbar =>
             {
-                toolbar.Search(); 
+                toolbar.Search();
                 toolbar.Excel();
                 toolbar.Pdf();
             })
@@ -70,7 +91,7 @@
             .Navigatable()
             .Resizable(r => r.Columns(true))
             .Reorderable(r => r.Columns(true))
-            .Groupable(g => g.ShowFooter(false)) // for showing groupable you also create group by drag a column to groupable 
+            .Groupable(g => g.ShowFooter(false)) // for showing groupable you also create group by drag a column to groupable
             .Filterable()
             .Scrollable()
             .HtmlAttributes(new { style = "height:550px;" })
@@ -81,5 +102,8 @@
                 .Group(groups => groups.Add(p => p.Category)) // for adding group
             )
         )
+        </div>
     </div>
+
+
 </div>
